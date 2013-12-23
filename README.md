@@ -1,6 +1,7 @@
 # Setty
 
-TODO: Write a gem description
+Mini application configuration for Rails projects.
+
 
 ## Installation
 
@@ -12,13 +13,21 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install setty
-
 ## Usage
 
-TODO: Write usage instructions here
+The config files will be automatically loaded after rails loads.
+
+Example:
+
+```
+# TODO
+```
+
+This gives you the following object hierarchy:
+```
+# TODO
+```
+
 
 ## Contributing
 
