@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Setty::VERSION
   spec.authors       = ["Radoslav Stankov"]
   spec.email         = ["rstankov@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Mini application configuration for Rails projects.}
+  spec.summary       = %q{Geneartes object hierarchy based on YAML files}
+  spec.homepage      = "https://github.com/rstankov/setty"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -20,4 +20,8 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency 'rspec', '~> 2.14'
+  spec.add_development_dependency 'rspec-mocks', '>= 2.12.3'
+  spec.add_development_dependency 'coveralls'
 end
+
