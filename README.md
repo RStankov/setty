@@ -1,3 +1,7 @@
+[![Code Climate](https://codeclimate.com/github/RStankov/setty.png)](https://codeclimate.com/github/RStankov/setty)
+[![Build Status](https://secure.travis-ci.org/RStankov/setty.png)](http://travis-ci.org/RStankov/setty)
+[![Code coverage](https://coveralls.io/repos/RStankov/setty/badge.png?branch=master)](https://coveralls.io/r/RStankov/setty)
+
 # Setty
 
 Mini application configuration for Rails projects.
