@@ -43,7 +43,7 @@ You can find example of most important features and plugins - [here](#TODO).
 
 ### Configurable
 
-```
+```Ruby
 # application.rb
 module MyApp
   class Application < Rails::Application
@@ -78,7 +78,8 @@ Settings::Validations.require_user_to_belong_to_account? #=> true
 
 ### Interpolation
 
-```s3.yml
+```
+# s3.yml
 production:
   access_key_id: <%= ENV['S3_ACCESS_KEY'] %>
   secret_access_key: <%= ENV['S3_SECRET_KEY'] %>
