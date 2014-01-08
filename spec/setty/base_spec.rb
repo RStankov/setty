@@ -24,6 +24,11 @@ describe Setty do
       options = Setty.options_from_file(path, 'test')
       expect(options.enviroment).to eq 2
     end
+
+    it "returns an empty options for non existing yaml file" do
+      options = Setty.options_from_file('non-existing', 'test')
+      expect(options).to be_empty
+    end
   end
 
   def generate_yaml(content)
