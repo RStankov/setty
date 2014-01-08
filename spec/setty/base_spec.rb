@@ -32,6 +32,8 @@ describe Setty do
       options = Setty.load(path, 'test')
       expect(options::Inner0.inner).to eq 0
       expect(options::Inner1.inner).to eq 1
+      expect(options::Inner1::Inner2::Inner3.inner).to eq 123
+      expect { options::InnerEmpty }.to_not raise_error
     end
   end
 end

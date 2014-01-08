@@ -23,16 +23,20 @@ module Setty
     end
 
     def options
-      mod = build_module load("#{@base_path}.yml")
-      Dir.glob(File.join(@base_path, '/*')).each do |file_path|
-        mod.const_set File.basename(file_path, '.yml').classify, load(file_path)
-      end
-      mod
+      load_options @base_path
     end
 
     private
 
-    def build_module(options)
+    def load_options(path)
+      options = module_from load_options_from_file("#{path}.yml")
+      find_nested_options(path).each do |sub_path|
+        options.const_set File.basename(sub_path).classify, load_options(sub_path)
+      end
+      options
+    end
+
+    def module_from(options)
       Module.new do
         extend DelegateToOptions
 
@@ -40,7 +44,11 @@ module Setty
       end
     end
 
-    def load(path)
+    def find_nested_options(path)
+      Dir.glob(File.join(path, '/*')).map { |file_path| "#{path}/#{File.basename(file_path, '.yml')}" }.uniq
+    end
+
+    def load_options_from_file(path)
       return ActiveSupport::OrderedOptions.new unless File.readable? path
 
       yaml_content       = ERB.new(File.read(path)).result
