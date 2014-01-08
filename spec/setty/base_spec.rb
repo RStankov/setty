@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'tempfile'
 require 'active_support/ordered_options'
 require 'active_support/core_ext/hash/keys.rb'
+require 'active_support/core_ext/string/inflections.rb'
 
 describe Setty do
   def fixture(file_name)
@@ -26,11 +27,11 @@ describe Setty do
       expect(options).to be_empty
     end
 
-#     it "supports nested settings" do
-#       path = fixture 'settings'
-#       options = Setty.load(path, 'test')
-#       expect(options::Inner0.inner).to eq 1
-#       expect(options::Inner1.inner).to eq 2
-#     end
+    it "supports nested settings" do
+      path = fixture 'settings'
+      options = Setty.load(path, 'test')
+      expect(options::Inner0.inner).to eq 0
+      expect(options::Inner1.inner).to eq 1
+    end
   end
 end

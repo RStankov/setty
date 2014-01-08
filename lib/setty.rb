@@ -23,7 +23,11 @@ module Setty
     end
 
     def options
-      build_module load("#{@base_path}.yml")
+      mod = build_module load("#{@base_path}.yml")
+      Dir.glob(File.join(@base_path, '/*')).each do |file_path|
+        mod.const_set File.basename(file_path, '.yml').classify, load(file_path)
+      end
+      mod
     end
 
     private
