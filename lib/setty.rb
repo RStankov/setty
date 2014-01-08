@@ -13,9 +13,15 @@ module Setty
     end
 
     def options
-      return ActiveSupport::OrderedOptions.new unless File.readable? @base_path
+      load "#{@base_path}.yml"
+    end
 
-      yaml_content       = ERB.new(File.read(@base_path)).result
+    private
+
+    def load(path)
+      return ActiveSupport::OrderedOptions.new unless File.readable? path
+
+      yaml_content       = ERB.new(File.read(path)).result
       options            = YAML.load yaml_content
       enviroment_options = options[@enviroment.to_s]
 

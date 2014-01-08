@@ -10,13 +10,13 @@ describe Setty do
 
   describe "#load" do
     it "loads yaml depending on environment variable" do
-      path = fixture 'settings.yml'
+      path = fixture 'settings'
       options = Setty.load(path, 'test')
       expect(options.enviroment).to eq 'test'
     end
 
     it "interpolates the yaml content" do
-      path = fixture 'settings.yml'
+      path = fixture 'settings'
       options = Setty.load(path, 'test')
       expect(options.interpolation).to eq 2
     end
