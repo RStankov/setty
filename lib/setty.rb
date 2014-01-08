@@ -6,6 +6,16 @@ module Setty
     Loader.new(path, enviroment).options
   end
 
+  module DelegateToOptions
+    def method_missing(method, *args)
+      @options.public_send method, *args
+    end
+
+    def respond_to_missing?(method)
+      @options.respond_to? method
+    end
+  end
+
   class Loader
     def initialize(path, enviroment)
       @base_path  = path
@@ -13,10 +23,18 @@ module Setty
     end
 
     def options
-      load "#{@base_path}.yml"
+      build_module load("#{@base_path}.yml")
     end
 
     private
+
+    def build_module(options)
+      Module.new do
+        extend DelegateToOptions
+
+        @options = options
+      end
+    end
 
     def load(path)
       return ActiveSupport::OrderedOptions.new unless File.readable? path
