@@ -2,7 +2,7 @@ require 'setty/version'
 require 'erb'
 
 module Setty
-  def self.options_from_file(path, enviroment)
+  def self.load(path, enviroment)
     return ActiveSupport::OrderedOptions.new unless File.readable? path
 
     yaml_content       = ERB.new(File.read(path)).result

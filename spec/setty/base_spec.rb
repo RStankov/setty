@@ -4,7 +4,7 @@ require 'active_support/ordered_options'
 require 'active_support/core_ext/hash/keys.rb'
 
 describe Setty do
-  describe "#options_from_file" do
+  describe "#load" do
     it "loads yaml depending on environment variable" do
       path = generate_yaml <<-YAML
       production:
@@ -12,7 +12,7 @@ describe Setty do
       test:
         enviroment: 'test'
       YAML
-      options = Setty.options_from_file(path, 'test')
+      options = Setty.load(path, 'test')
       expect(options.enviroment).to eq 'test'
     end
 
@@ -21,12 +21,12 @@ describe Setty do
       test:
         enviroment: <%= 1 + 1 %>
       YAML
-      options = Setty.options_from_file(path, 'test')
+      options = Setty.load(path, 'test')
       expect(options.enviroment).to eq 2
     end
 
     it "returns an empty options for non existing yaml file" do
-      options = Setty.options_from_file('non-existing', 'test')
+      options = Setty.load('non-existing', 'test')
       expect(options).to be_empty
     end
   end
