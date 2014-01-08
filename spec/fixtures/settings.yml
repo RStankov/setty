@@ -1,0 +1,7 @@
+production:
+  enviroment: 'production'
+
+test:
+  enviroment: 'test'
+  interpolation: <%= 1 + 1 %>
+
