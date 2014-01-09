@@ -11,34 +11,34 @@ describe Setty do
 
   describe "#load" do
     it "loads yaml depending on environment variable" do
-      path = fixture 'settings'
-      options = Setty.load(path, 'test')
+      options = load 'settings'
       expect(options.enviroment).to eq 'test'
     end
 
     it "interpolates the yaml content" do
-      path = fixture 'settings'
-      options = Setty.load(path, 'test')
+      options = load 'settings'
       expect(options.interpolation).to eq 2
     end
 
     it "returns an empty options for non existing yaml file" do
-      options = Setty.load('non-existing', 'test')
+      options = load 'non-existing'
       expect(options).to be_empty
     end
 
     it "supports nested settings" do
-      path = fixture 'settings'
-      options = Setty.load(path, 'test')
+      options = load 'settings'
       expect(options.inner_0.inner).to eq 0
       expect(options.inner_1.inner).to eq 1
       expect(options.inner_1.inner_2.inner_3.inner).to eq 123
     end
 
     it "supports empty nested settings" do
-      path = fixture 'settings'
-      options = Setty.load(path, 'test')
+      options = load 'settings'
       expect(options.inner_empty).to eq({})
+    end
+
+    def load(name, env = 'test')
+      Setty.load fixture(name), env
     end
   end
 end
