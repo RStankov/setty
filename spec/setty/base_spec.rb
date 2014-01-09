@@ -30,15 +30,15 @@ describe Setty do
     it "supports nested settings" do
       path = fixture 'settings'
       options = Setty.load(path, 'test')
-      expect(options::Inner0.inner).to eq 0
-      expect(options::Inner1.inner).to eq 1
-      expect(options::Inner1::Inner2::Inner3.inner).to eq 123
+      expect(options.inner_0.inner).to eq 0
+      expect(options.inner_1.inner).to eq 1
+      expect(options.inner_1.inner_2.inner_3.inner).to eq 123
     end
 
     it "supports empty nested settings" do
       path = fixture 'settings'
       options = Setty.load(path, 'test')
-      expect { options::InnerEmpty }.to_not raise_error
+      expect(options.inner_empty).to eq({})
     end
   end
 end

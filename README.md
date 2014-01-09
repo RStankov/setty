@@ -108,9 +108,9 @@ Will produce the following settings options hierarchy:
 
 ```Ruby
 Settings
-Settings::Validations
-Settings::Validations::Product
-Settings::Validations::Category
+Settings.validations
+Settings.validations.product
+Settings.validations.category
 ```
 
 ## Contributing

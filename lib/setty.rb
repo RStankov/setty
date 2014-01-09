@@ -6,16 +6,6 @@ module Setty
     Loader.new(path, enviroment).options
   end
 
-  module DelegateToOptions
-    def method_missing(method, *args)
-      @options.public_send method, *args
-    end
-
-    def respond_to_missing?(method)
-      @options.respond_to? method
-    end
-  end
-
   class Loader
     def initialize(path, enviroment)
       @base_path  = path
@@ -29,19 +19,11 @@ module Setty
     private
 
     def load_options(path)
-      options = module_from load_options_from_file("#{path}.yml")
+      options = load_options_from_file "#{path}.yml"
       find_nested_options(path).each do |sub_path|
-        options.const_set File.basename(sub_path).classify, load_options(sub_path)
+        options[:"#{File.basename(sub_path)}"] = load_options(sub_path)
       end
       options
-    end
-
-    def module_from(options)
-      Module.new do
-        extend DelegateToOptions
-
-        @options = options
-      end
     end
 
     def find_nested_options(path)
