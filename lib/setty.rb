@@ -1,5 +1,6 @@
 require 'setty/version'
 require 'erb'
+require 'yaml'
 
 module Setty
   def self.load(path, enviroment)
