@@ -1,4 +1,7 @@
 require 'setty/version'
+require 'setty/options'
+require 'active_support/core_ext/hash/keys.rb'
+require 'active_support/core_ext/string/inflections.rb'
 require 'erb'
 require 'yaml'
 
@@ -32,13 +35,13 @@ module Setty
     end
 
     def load_options_from_file(path)
-      return ActiveSupport::OrderedOptions.new unless File.readable? path
+      return Options.new unless File.readable? path
 
       yaml_content       = ERB.new(File.read(path)).result
       options            = YAML.load yaml_content
       enviroment_options = options[@enviroment.to_s]
 
-      ActiveSupport::OrderedOptions[enviroment_options.symbolize_keys]
+      Options[enviroment_options.symbolize_keys]
     end
   end
 end

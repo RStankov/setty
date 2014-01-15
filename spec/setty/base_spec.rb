@@ -1,8 +1,5 @@
 require 'spec_helper'
 require 'tempfile'
-require 'active_support/ordered_options'
-require 'active_support/core_ext/hash/keys.rb'
-require 'active_support/core_ext/string/inflections.rb'
 
 describe Setty do
   def fixture(file_name)
@@ -13,6 +10,7 @@ describe Setty do
     it "loads yaml depending on environment variable" do
       options = load 'settings'
       expect(options.enviroment).to eq 'test'
+      expect(options.active?).to be_true
     end
 
     it "interpolates the yaml content" do

@@ -1,7 +1,9 @@
 production:
   enviroment: 'production'
+  active: false
 
 test:
   enviroment: 'test'
   interpolation: <%= 1 + 1 %>
+  active: true
 
