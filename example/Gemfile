@@ -7,3 +7,9 @@ gem 'slim'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'rspec-rails'
+
+group :development do
+  gem 'quiet_assets'
+  gem 'thin'
+end
+
