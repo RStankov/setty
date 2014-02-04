@@ -1,0 +1,7 @@
+development:
+  site_name: 'Setty Site Name'
+  loaded: true
+
+test:
+  site_name: 'Bala bla'
+  loaded: false

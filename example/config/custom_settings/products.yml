@@ -1,0 +1,5 @@
+development:
+  minumum_photos_count: 4
+
+test:
+  minumum_photos_count: 0
