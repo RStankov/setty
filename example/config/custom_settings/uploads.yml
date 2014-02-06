@@ -1,3 +1,6 @@
 development:
   s3_secret_token: "<%= ENV['S3_SECRET_TOKEN'] %>"
   s3_active: false
+
+test:
+  s3_active: false
