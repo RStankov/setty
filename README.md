@@ -24,22 +24,48 @@ The config files will be automatically loaded after rails loads.
 Example:
 
 ```
-# TODO
+# config/settings.yml
+production:
+  secret_token: "<%= ENV['SECRET_TOKEN'] %>"
+  ssl_only: true
+
+developement:
+  secret_token: "blablablabla"
+  ssl_only: false
 ```
 
-This gives you the following object hierarchy:
 ```
-# TODO
+# config/settings/products.yml
+production:
+  minumum_photos_count: 4
+
+development:
+  minumum_photos_count: 1
+
+test:
+  minumum_photos_count: 0
 ```
 
-You can find example of most important features and plugins - [here](#TODO).
+This gives you the `Settings` object:
+
+```Ruby
+# in development
+
+Settings.secret_token                  #=> "blablablabla"
+Settings.secret_token?                 #=> true
+Settings.ssl_only                      #=> false
+Settings.ssl_only?                     #=> false
+Settings.projects.minumum_photos_count #= 1
+```
+
+You can find example of most important features and plugins - [here](https://github.com/RStankov/setty/tree/master/example).
 
 ## Features:
 
 * Configurable
 * Environment dependent
 * Interpolation
-* Nested configuration directories
+* Nested settings
 
 ### Configurable
 
@@ -48,8 +74,8 @@ You can find example of most important features and plugins - [here](#TODO).
 module MyApp
   class Application < Rails::Application
     # ... code ... code ...
-    config.setty.root_class_name    = 'AppConfig'  # => Settings will be loaded in `AppConfig`
-    config.setty.configuration_path = 'settings'   # => extracts Settings from `config/settings/*` and `config/settings.yml`
+    config.setty.settings_object_name    = 'Settings'  # => Settings will be loaded in `Settings`
+    config.setty.settings_path           = 'settings'   # => extracts Settings from `config/settings/*` and `config/settings.yml`
   end
 end
 ```
@@ -74,23 +100,35 @@ Depending on your Rails environment:
 # in development
 Settings::Validations.require_user_to_belong_to_account  #=> true
 Settings::Validations.require_user_to_belong_to_account? #=> true
+
+# in test
+Settings::Validations.require_user_to_belong_to_account  #=> false
+Settings::Validations.require_user_to_belong_to_account? #=> false
 ```
 
 ### Interpolation
 
 ```
+production:
+  archives_path: "<%= Rails.root.join('archives').realpath %>"
+```
+
+
+### Plays nicely with Donenv
+
+```
 # s3.yml
 production:
-  access_key_id: <%= ENV['S3_ACCESS_KEY'] %>
-  secret_access_key: <%= ENV['S3_SECRET_KEY'] %>
-  region: 'eu-west-1'
-  bucket: 'my-app'
+  access_key_id: "<%= ENV['S3_ACCESS_KEY'] %>"
+  secret_access_key: "<%= ENV['S3_SECRET_KEY'] %>"
+  region: "eu-west-1"
+  bucket: "my-app"
 ```
 
 ```Ruby
 # in production
-Settings::S3.access_key_id     #=> ENV['S3_ACCESS_KEY']
-Settings::S3.secret_access_key #=> ENV['S3_SECRET_KEY']
+Settings::S3.access_key_id     #=> S3_ACCESS_KEY from `.env.production`
+Settings::S3.secret_access_key #=> S3_SECRET_KEY from `.env.production`
 ```
 
 ### Nested Settings
