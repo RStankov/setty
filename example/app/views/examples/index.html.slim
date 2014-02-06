@@ -5,16 +5,22 @@ table
     tr
       th Name
       th Value
+      th
   tbody
     tr
       td AppSettings.site_name
       td = AppSettings.site_name
+      td Settings loaded from root settings file "<i>config/custom_settings.yml</i>"
     tr
       td AppSettings.products.minumum_photos_count
       td = AppSettings.products.minumum_photos_count
+      td Nested settings from "<i>config/custom_settings/products</i>"
     tr
       td AppSettings.uploads.s3_secret_token
       td = AppSettings.uploads.s3_secret_token
+      td Interpolated Dotenv settings from "<i>config/custom_settings/uploads" (ENV loaded from ".env")
+
     tr
-      td AppSettings.uploads.s3_active
-      td = AppSettings.uploads.s3_active
+      td AppSettings.uploads.s3_active?
+      td = AppSettings.uploads.s3_active?
+      td Presence checker
