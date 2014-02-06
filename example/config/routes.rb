@@ -1,3 +1,3 @@
 Example::Application.routes.draw do
-  root to: 'front#index'
+  root to: 'examples#index'
 end
