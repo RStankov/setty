@@ -4,6 +4,8 @@ require 'active_support/core_ext/hash/keys.rb'
 require 'active_support/core_ext/string/inflections.rb'
 
 module Setty
+  MissingEnviromentError = Class.new(RuntimeError)
+
   class Loader
     def initialize(path, enviroment)
       @base_path  = path
@@ -29,13 +31,20 @@ module Setty
     end
 
     def load_options_from_file(path)
-      return Options.new unless File.readable? path
+      enviroment_options = load_enviroment_options_from_file path
 
-      yaml_content       = ERB.new(File.read(path)).result
-      options            = YAML.load yaml_content
-      enviroment_options = options[@enviroment.to_s]
+      raise MissingEnviromentError, %Q(Missing "#{@enviroment}" key in #{path}) if enviroment_options.nil?
 
       Options[enviroment_options.symbolize_keys]
+    end
+
+    def load_enviroment_options_from_file(path)
+      return {} unless File.readable? path
+
+      yaml_content = ERB.new(File.read(path)).result
+      options      = YAML.load yaml_content
+
+      options[@enviroment.to_s]
     end
   end
 end

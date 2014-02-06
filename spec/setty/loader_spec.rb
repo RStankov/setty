@@ -35,6 +35,10 @@ module Setty
       expect(options.inner_empty).to eq({})
     end
 
+    it "raises error on missing environment is settings" do
+      expect { load 'settings', 'bongus enviroment' }.to raise_error MissingEnviromentError
+    end
+
     def load(name, env = 'test')
       Loader.new(fixture(name), env).options
     end
