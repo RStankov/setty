@@ -17,3 +17,15 @@
 
 body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; }
 
+#example {
+  padding: 40px;
+  width: 100%;
+  min-width: 900px;
+
+  h1 { font-weight: 500; font-size: 36px; margin-bottom: 20px; }
+
+  table thead label { color: #428bca; }
+  table thead .active { font-weight: bold; color: black; }
+  table thead input[type="text"] { padding: 0 6px; width: 99%; }
+  table tbody .empty { text-align: center; }
+}
