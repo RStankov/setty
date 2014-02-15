@@ -114,7 +114,7 @@ production:
 ```
 
 
-### Plays nicely with Donenv
+### Plays nicely with Dotenv
 
 ```
 # s3.yml
