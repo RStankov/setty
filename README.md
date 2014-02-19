@@ -56,7 +56,7 @@ Settings.secret_token                  #=> "blablablabla"
 Settings.secret_token?                 #=> true
 Settings.ssl_only                      #=> false
 Settings.ssl_only?                     #=> false
-Settings.projects.minumum_photos_count #= 1
+Settings.products.minumum_photos_count #= 1
 ```
 
 You can find example of most important features and plugins - [here](https://github.com/RStankov/setty/tree/master/example).
