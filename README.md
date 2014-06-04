@@ -99,12 +99,12 @@ Depending on your Rails environment:
 
 ```Ruby
 # in development
-Settings::Validations.require_user_to_belong_to_account  #=> true
-Settings::Validations.require_user_to_belong_to_account? #=> true
+Settings.validations.require_user_to_belong_to_account  #=> true
+Settings.validations.require_user_to_belong_to_account? #=> true
 
 # in test
-Settings::Validations.require_user_to_belong_to_account  #=> false
-Settings::Validations.require_user_to_belong_to_account? #=> false
+Settings.validations.require_user_to_belong_to_account  #=> false
+Settings.validations.require_user_to_belong_to_account? #=> false
 ```
 
 ### Interpolation
@@ -128,8 +128,8 @@ production:
 
 ```Ruby
 # in production
-Settings::S3.access_key_id     #=> S3_ACCESS_KEY from `.env.production`
-Settings::S3.secret_access_key #=> S3_SECRET_KEY from `.env.production`
+Settings.s3.access_key_id     #=> S3_ACCESS_KEY from `.env.production`
+Settings.s3.secret_access_key #=> S3_SECRET_KEY from `.env.production`
 ```
 
 ### Nested Settings
