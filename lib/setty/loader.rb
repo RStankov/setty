@@ -6,6 +6,7 @@ require 'active_support/core_ext/string/inflections.rb'
 
 module Setty
   MissingEnviromentError = Class.new(RuntimeError)
+  NotReadableFileError = Class.new(RuntimeError)
 
   class Loader
     def initialize(path, enviroment)
@@ -40,7 +41,9 @@ module Setty
     end
 
     def load_enviroment_options_from_file(file)
-      return {} unless file.readable?
+      return {} unless file.exist?
+
+      raise NotReadableFileError, %Q(Settings file "#{file}" is not readable) unless file.readable?
 
       yaml_content = ERB.new(file.read).result
       options      = YAML.load yaml_content

@@ -39,6 +39,16 @@ module Setty
       expect { load 'settings', 'bongus enviroment' }.to raise_error MissingEnviromentError
     end
 
+    it "raises error on not readable settings file" do
+      begin
+        File.chmod(0200, fixture('forbidden.yml'))
+
+        expect { load 'forbidden' }.to raise_error NotReadableFileError
+      ensure
+        File.chmod(0777, fixture('forbidden.yml'))
+      end
+    end
+
     def load(name, env = 'test')
       Loader.new(fixture(name), env).options
     end
