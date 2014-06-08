@@ -10,7 +10,7 @@ module Setty
   class Loader
     def initialize(path, enviroment)
       @base_path  = Pathname(path)
-      @enviroment = enviroment
+      @enviroment = enviroment.to_s
     end
 
     def options
@@ -45,7 +45,7 @@ module Setty
       yaml_content = ERB.new(file.read).result
       options      = YAML.load yaml_content
 
-      options[@enviroment.to_s]
+      options[@enviroment]
     end
   end
 end
