@@ -1,5 +1,6 @@
 require 'erb'
 require 'yaml'
+require 'pathname'
 require 'active_support/core_ext/hash/keys.rb'
 require 'active_support/core_ext/string/inflections.rb'
 
@@ -8,7 +9,7 @@ module Setty
 
   class Loader
     def initialize(path, enviroment)
-      @base_path  = path
+      @base_path  = Pathname(path)
       @enviroment = enviroment
     end
 
@@ -19,15 +20,15 @@ module Setty
     private
 
     def load_options(path)
-      options = load_options_from_file "#{path}.yml"
+      options = load_options_from_file path.sub_ext('.yml')
       find_nested_options(path).each do |sub_path|
-        options[:"#{File.basename(sub_path)}"] = load_options(sub_path)
+        options[sub_path.basename.to_s.to_sym] = load_options sub_path
       end
       options
     end
 
     def find_nested_options(path)
-      Dir.glob(File.join(path, '/*')).map { |file_path| "#{path}/#{File.basename(file_path, '.yml')}" }.uniq
+      Pathname.glob(path.join('*')).map { |file_path| path.join file_path.basename('.yml') }.uniq
     end
 
     def load_options_from_file(path)
@@ -38,10 +39,10 @@ module Setty
       Options[enviroment_options.symbolize_keys]
     end
 
-    def load_enviroment_options_from_file(path)
-      return {} unless File.readable? path
+    def load_enviroment_options_from_file(file)
+      return {} unless file.readable?
 
-      yaml_content = ERB.new(File.read(path)).result
+      yaml_content = ERB.new(file.read).result
       options      = YAML.load yaml_content
 
       options[@enviroment.to_s]
