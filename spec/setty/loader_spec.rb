@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'tempfile'
 
 module Setty
   describe Loader do
