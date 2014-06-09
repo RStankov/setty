@@ -2,7 +2,9 @@
 
 ## Version 1.1 (unreleased)
 
-* Raise error when settings file exists, but is not readable
+* Added reload method to Settings.
+
+* Raise error when settings file exists, but is not readable.
 
 * Added `settings_environment` option. It defaults to `Rails.env`.
 
@@ -20,4 +22,4 @@
 
 ## Version 1.0
 
-* Initial release
+* Initial release.
