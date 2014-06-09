@@ -1,4 +1,7 @@
 #example
+  - if flash[:notice]
+    .alert.alert-success = flash[:notice]
+
   h1 Settings values
 
   table.table.table-striped.table-bordered
@@ -25,3 +28,7 @@
         td AppSettings.uploads.s3_active?
         td = AppSettings.uploads.s3_active?
         td Presence checker
+
+
+  p
+    = link_to 'Reload settings', reload_path
