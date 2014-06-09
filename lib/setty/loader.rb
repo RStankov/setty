@@ -14,16 +14,16 @@ module Setty
       @enviroment = enviroment.to_s
     end
 
-    def options
-      load_options @base_path
+    def load_options
+      load_option_and_sub_options @base_path
     end
 
     private
 
-    def load_options(path)
+    def load_option_and_sub_options(path)
       options = load_options_from_file path.sub_ext('.yml')
       find_nested_options(path).each do |sub_path|
-        options[sub_path.basename.to_s.to_sym] = load_options sub_path
+        options[sub_path.basename.to_s.to_sym] = load_option_and_sub_options sub_path
       end
       options
     end

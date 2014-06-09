@@ -5,6 +5,6 @@ require 'setty/railtie' if defined? Rails
 
 module Setty
   def self.load(path, enviroment)
-    Loader.new(path, enviroment).options
+    Loader.new(path, enviroment).load_options
   end
 end

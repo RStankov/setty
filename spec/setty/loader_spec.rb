@@ -50,7 +50,7 @@ module Setty
     end
 
     def load(name, env = 'test')
-      Loader.new(fixture(name), env).options
+      Loader.new(fixture(name), env).load_options
     end
   end
 end

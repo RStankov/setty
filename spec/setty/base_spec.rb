@@ -7,7 +7,7 @@ describe Setty do
 
   describe "#load" do
     it "returns loaded options" do
-      loader = double options: 'options'
+      loader = double load_options: 'options'
       allow(Setty::Loader).to receive(:new).with('path', 'enviroment').and_return loader
 
       expect(Setty.load('path', 'enviroment')).to eq 'options'
