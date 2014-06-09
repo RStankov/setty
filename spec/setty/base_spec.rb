@@ -6,11 +6,11 @@ describe Setty do
   end
 
   describe "#load" do
-    it "returns loaded options" do
-      loader = double load_options: 'options'
-      allow(Setty::Loader).to receive(:new).with('path', 'enviroment').and_return loader
+    it "returns settings" do
+      allow(Setty::Loader).to receive(:new).with('path', 'enviroment').and_return 'loader'
+      allow(Setty::Settings).to receive(:new).with('loader').and_return 'settings'
 
-      expect(Setty.load('path', 'enviroment')).to eq 'options'
+      expect(Setty.load('path', 'enviroment')).to eq 'settings'
     end
   end
 end
