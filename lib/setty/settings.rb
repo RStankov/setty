@@ -1,8 +1,8 @@
 module Setty
   class Settings < Delegator
-    def initialize(obj)
-      @loader  = obj
-      @options = obj.load_options
+    def initialize(loader)
+      @loader  = loader
+      @options = loader.load_options
     end
 
     def __getobj__
