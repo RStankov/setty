@@ -9,7 +9,7 @@ module Setty
     it "loads yaml depending on environment variable" do
       options = load 'settings'
       expect(options.enviroment).to eq 'test'
-      expect(options.active?).to be_true
+      expect(options.active?).to be_truthy
     end
 
     it "does not complain about missing yaml file" do

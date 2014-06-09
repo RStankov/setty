@@ -12,7 +12,7 @@ module Setty
     end
 
     it "caches the loaded options" do
-      loader.should_receive(:load_options).once
+      allow(loader).to receive(:load_options).once.and_return options
 
       config = Settings.new(loader)
 
@@ -23,7 +23,7 @@ module Setty
       it "loads options again from the loader" do
         config = Settings.new(loader)
 
-        loader.stub load_options: 'new options'
+        allow(loader).to receive(:load_options).and_return 'new options'
 
         config.reload
 

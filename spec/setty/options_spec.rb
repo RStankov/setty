@@ -19,9 +19,9 @@ module Setty
     it "has attribute checker" do
       options = Setty::Options[active: true, disabled: false]
 
-      expect(options.active?).to be_true
-      expect(options.disabled?).to be_false
-      expect(options.missing?).to be_false
+      expect(options.active?).to be_truthy
+      expect(options.disabled?).to be_falsey
+      expect(options.missing?).to be_falsey
     end
   end
 end
