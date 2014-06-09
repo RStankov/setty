@@ -1,6 +1,7 @@
 require 'setty/version'
 require 'setty/options'
 require 'setty/loader'
+require 'setty/settings'
 require 'setty/railtie' if defined? Rails
 
 module Setty
