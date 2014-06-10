@@ -12,11 +12,13 @@ module Setty
     end
 
     it "caches the loaded options" do
-      allow(loader).to receive(:load_options).once.and_return options
+      allow(loader).to receive(:load_options).and_return options
 
       config = Settings.new(loader)
 
       2.times { config.size }
+
+      expect(loader).to have_received(:load_options).once
     end
 
     describe "#reload" do
