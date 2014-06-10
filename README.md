@@ -56,7 +56,7 @@ Settings.secret_token                  #=> "blablablabla"
 Settings.secret_token?                 #=> true
 Settings.ssl_only                      #=> false
 Settings.ssl_only?                     #=> false
-Settings.products.minumum_photos_count #= 1
+Settings.products.minumum_photos_count #=> 1
 ```
 
 You can find example of most important features and plugins - [here](https://github.com/RStankov/setty/tree/master/example).
@@ -67,6 +67,7 @@ You can find example of most important features and plugins - [here](https://git
 * Environment dependent
 * Interpolation
 * Nested settings
+* Reloading settings
 
 ### Configurable
 
@@ -75,8 +76,9 @@ You can find example of most important features and plugins - [here](https://git
 module MyApp
   class Application < Rails::Application
     # ... code ... code ...
-    config.setty.settings_object_name    = 'Settings'  # => Settings will be loaded in `Settings`
-    config.setty.settings_path           = 'settings'   # => extracts Settings from `config/settings/*` and `config/settings.yml`
+    config.setty.settings_object_name    = 'Settings'  # => settings will be loaded in `Settings`
+    config.setty.settings_path           = 'settings'  # => extracts settings from `config/settings/*` and `config/settings.yml`
+    config.setty.settings_environment    = Rails.env   # => enviroment name (defaults to Rails.env)
   end
 end
 ```
@@ -150,6 +152,14 @@ Settings
 Settings.validations
 Settings.validations.product
 Settings.validations.category
+```
+
+### Reloading
+
+You can reload the current settings by calling:
+
+```ruby
+Settings.reload
 ```
 
 ## Contributing
